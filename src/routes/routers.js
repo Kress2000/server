@@ -5,7 +5,6 @@ const router = express.Router();
 const actionController = require("../controllers/actionController");
 const userController = require("../controllers/usersController");
 const blogsController = require("../controllers/blogsController");
-const { forwardAuthenticated } = require("../configs/auth");
 const app = express();
 const { blog } = require("../models/blogs");
 app.use(express.json());
@@ -24,18 +23,9 @@ const storage = multer.diskStorage({
     cb(null, new Date().toISOString() + file.originalname);
   },
 });
-
-// authAdmin(["erickykress@gmail.com"]) //check if yuo are admin
-// const upload = multer({dest: '../../uploadedImg'});
 const upload = multer({ storage: storage });
 // Login Page
-router.get("/login", forwardAuthenticated, (req, res) =>
-  res.render({ message: "login" })
-);
-// Register Page
-router.get("/signup", forwardAuthenticated, (req, res) =>
-  res.render({ message: "signup" })
-);
+
 //logout
 router.delete("/logout", actionController.logout_get);
 // add users

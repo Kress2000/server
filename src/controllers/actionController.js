@@ -6,12 +6,10 @@ app.use(express.urlencoded());
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const ACCESS_TOKEN_SECRET = "secrete";
-const passport = require("passport");
 // Load User model
 const { user } = require("../models/users");
 const User = user;
 const jwt = require("jsonwebtoken");
-// const e = require("connect-flash");
 app.use(bodyParser.json());
 
 // Register
@@ -60,12 +58,11 @@ module.exports.signup_post = async (req, res) => {
         const token = await jwt.sign(
           { email: newUser.email, id: newUser._id },
           ACCESS_TOKEN_SECRET,
-          { expiresIn: "1h" }
+          { expiresIn: "100h" }
         );
         res
           .status(201)
           .json({ message: "Account created", user: newUser, token: token });
-        // req.flash("success_msg", "You are now registered and can log in");
 
         // return res.redirect("/login");
       } catch (err) {
@@ -120,11 +117,6 @@ module.exports.login_post = async (req, res, next) => {
     // res.redirect("/signup");
   }
 };
-passport.authenticate("local", {
-  successRedirect: "/blogs",
-  failureRedirect: "/login",
-  failureFlash: true,
-})
 module.exports.logout_get =  (req, res) => {
   if (req.session) {
     req.session.destroy(err => {
