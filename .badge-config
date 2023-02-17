@@ -1,0 +1,17 @@
+{
+  "coverage_file_path": "./coverage/coverage-summary.json",
+  "badges": {
+    "coverage": {
+      "style": "flat",
+      "logo": "kotlin",
+      "logoColor": "orange",
+      "color": "white"
+    },
+    "branches": {
+      "style": "social",
+      "logo": "ktor",
+      "logoColor": "black",
+      "color": "red"
+    }
+  }
+}
