@@ -21,8 +21,7 @@
     "test": "mocha src/test/  --recursive --exit",
     "coverage:badge": "coverage-badge-creator --config './badge-config'",
     "coverage": "nyc --reporter=lcov --reporter=text npm run test",
-    "semantic-release": "semantic-release",
-    "build": "node index.js build"
+    "semantic-release": "semantic-release"
   },
   "nyc": {
     "exclude": [
@@ -54,7 +53,6 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
-    "build": "^0.1.4",
     "chai": "^4.3.7",
     "chai-http": "^4.3.0",
     "ci": "^2.2.0",
