@@ -22,7 +22,7 @@
     "coverage:badge": "coverage-badge-creator --config './badge-config'",
     "coverage": "nyc --reporter=lcov --reporter=text npm run test",
     "semantic-release": "semantic-release",
-    "build": "NODE_ENV=production blitz build && blitz prisma migrate deploy"
+    "build": "NODE_ENV deploy"
   },
   "nyc": {
     "exclude": [
@@ -77,12 +77,13 @@
   },
   "devDependencies": {
     "arg": "4.1.3",
-    "debug": "^4.3.4",
     "coverage-badge-creator": "^1.0.17",
     "coverage-badges": "^1.0.7",
+    "debug": "^4.3.4",
     "lodash": "4.17.21",
-    "supertest": "^6.3.3",
     "nodemon": "^2.0.20",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "supertest": "^6.3.3",
+    "webpack-cli": "^5.0.1"
   }
 }

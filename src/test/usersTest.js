@@ -8,7 +8,6 @@ const request = require('supertest')
 chai.use(chaiHttp)
 let should = chai.should()
 const router = require('../routes/routers')
-
 describe('users API', () => {
   it('should Register user, login user, check token and delete a todo on /api/<id> DELETE', function (done) {
     chai
