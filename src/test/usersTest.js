@@ -32,17 +32,18 @@ describe('users API', () => {
         expect(res.body.password).to.eql(res.body.confirmPass)
         resonse.body.should.have.property('message')
         // follow up with login
-        chai.request(app)
-        .get('/mybrand/signup')
-        .end((req, res)=>{
-          res.body.should.have.property('message')
-        })
-        chai.request(app)
-        .get('/mybrand/login')
-        .end((req, res)=>{
-          res.body.should.have.property('message')
-
-        })
+        chai
+          .request(app)
+          .get('/mybrand/signup')
+          .end((req, res) => {
+            res.body.should.have.property('message')
+          })
+        chai
+          .request(app)
+          .get('/mybrand/login')
+          .end((req, res) => {
+            res.body.should.have.property('message')
+          })
         chai
           .request(app)
           .post('/mybrand/login')
@@ -157,22 +158,5 @@ describe('Users Routes test', () => {
         done()
       })
   })
-  // it('it Should login ', (done) => {
-  //   request(app)
-  //     .post('/mybrand/login')
-  //     .end(async(err, res) => {
-  //       // if (res.status === 401) {
-  //         res.should.have.status(200)
-
-  //         res.body.should.be.eql({ Error: 'Not authorized! Only Admin' })
-  //         const pair = 'btc_ltc';
-  //         const data = await shapeshift.getRate(pair);
-  //         expect(data.pair).to.equal(pair);
-  //         expect(data.rate).to.have.length(400);
-  //       // } else {
-  //         // if (res.status === 200) res.body.should.be.a('object')
-  //       // }
-  //       done()
-  //     })
-  // })
+ 
 })

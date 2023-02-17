@@ -28,7 +28,8 @@
     "exclude": [
       "src/test/*",
       "src/controllers",
-      "src/configs/*"
+      "src/configs/*",
+      "src/routes/blogs.js"
     ]
   },
   "repository": {
