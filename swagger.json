@@ -251,13 +251,16 @@
         "operationId": "deleteUser",
         "parameters": [
           {
-            "name": "id",
+            "title": "id",
             "in": "path",
-            "description": "The id that needs to be fetched. Use  for delete. ",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "description": "ID of blog that we want to find",
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -317,7 +320,8 @@
             "description": "Not found"
           }
         }
-      },"put": {
+      },
+      "put": {
         "tags": ["blogs"],
         "summary": "Update Blog",
         "description": "This can only be done by the logged in Admin.",
