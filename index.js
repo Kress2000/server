@@ -15,8 +15,9 @@ const swaggerUi = require('swagger-ui-express')
 swaggerDocument = require('./swagger.json')
 
 //port
-const PORT = process.env.PORT || 5000
-
+const PORT = process.env.PORT || 5000;
+var cors = require('cors')
+app.use(cors())
 // After you declare "app"
 app.use(session({ secret: 'melody hensley is my spirit animal' }))
 app.use(
