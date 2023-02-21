@@ -21,7 +21,7 @@
   },
   "servers": [
     {
-      "url": "https://server-production-24cc.up.railway.app/api-docs/"
+      "url": "https://nsanzimfura-server.up.railway.app/"
     },
     {
       "url": "http://localhost:5000/"
