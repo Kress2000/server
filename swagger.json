@@ -222,7 +222,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "description": "The id that needs to be fetched. Use user1 for testing. ",
             "required": true,
             "schema": {
               "type": "string"
@@ -251,29 +251,26 @@
       "delete": {
         "tags": ["user"],
         "summary": "Delete user",
-        "description": "User is deleted from the system.",
+        "description": "This can only be done by the logged in Admin.",
         "operationId": "deleteUser",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "The id that needs to be fetched. Use user1 for testing. ",
             "required": true,
-            "description": "ID of blog that we want to find",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "bearerAuth": []
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
-          "202": "Deleted successfully",
-          "400": {
-            "description": "Invalid username supplied"
+          "200": {
+            "description": "Blog is deleted",
+            "schema": {}
           },
           "404": {
-            "description": "User not found"
+            "description": "Not found"
           }
         }
       }
@@ -352,16 +349,12 @@
     },
     "/mybrand/api/blogs/add": {
       "post": {
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "tags": ["blogs"],
         "summary": "Create new blog in DB",
         "description": "Create new blog in DB",
+        "operationId": "createBlog",
         "requestBody": {
-          "description": "Created user object",
+          "description": "Created blog object",
           "content": {
             "application/json": {
               "schema": {
@@ -380,24 +373,22 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "blog that we want to create",
-            "schema": {
-              "$ref": "#/components/schemas/blog"
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/blog"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/blog"
+                }
+              }
             }
           }
-        ],
-        "responses": {
-          "201": {
-            "description": "New blog is created",
-            "schema": {
-              "$ref": "#/components/schemas/blog"
-            }
-          },
-          "500": "Bad request"
         }
       }
     }
@@ -453,19 +444,19 @@
         "properties": {
           "title": {
             "type": "string",
-            "example":"string"
+            "example": "string"
           },
           "description": {
             "type": "string",
-            "example":"Lorem ipsum dolor sit ameet"
+            "example": "Lorem ipsum dolor sit ameet"
           },
           "category": {
             "type": "string",
-            "example":"Code"
+            "example": "Code"
           },
           "img": {
             "type": "string",
-            "example":"img url"
+            "example": "img url"
           }
         }
       },
