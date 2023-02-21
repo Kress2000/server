@@ -449,23 +449,23 @@
         "$ref": "#/components/schemas/User"
       },
       "blog": {
-        "required": ["title", "description", "img"],
+        "required": ["title", "description", "img", "category"],
         "properties": {
-          "_id": {
-            "type": "string",
-            "uniqueItems": true
-          },
           "title": {
-            "type": "string"
+            "type": "string",
+            "example":"string"
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "example":"Lorem ipsum dolor sit ameet"
           },
           "category": {
-            "type": "string"
+            "type": "string",
+            "example":"Code"
           },
           "img": {
-            "type": "file"
+            "type": "string",
+            "example":"img url"
           }
         }
       },

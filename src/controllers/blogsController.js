@@ -62,14 +62,14 @@ module.exports.blog_delete = (req, res) => {
   })
 }
 module.exports.blog_post = async(req, res) => {
-    const { title, description, category } = req.body
-    console.log(res.body.img, req.files, 'got the shite')
+    const { title, description, img, category } = req.body;
+    console.log( req.body, "img", req.body.img)
     try {
       const newBlog = await blog.create({
         title,
         description,
         category,
-        img: res.body.img,
+        img ,
         time: new Date().toISOString(),
       })
       res.status(201).json({ message: 'Blog created', blog: newBlog })
