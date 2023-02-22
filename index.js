@@ -17,10 +17,7 @@ swaggerDocument = require('./swagger.json')
 //port
 const PORT = process.env.PORT || 5000;
 var cors = require('cors')
-app.use(cors({
-  origin: "*",
-  credentials: true
-}))
+
 app.use(session({ secret: 'melody hensley is my spirit animal' }))
 app.use(
   session({
@@ -54,5 +51,8 @@ app.use(
       'https://cdn.jsdelivr.net/npm/swagger-ui-themes@3.0.0/themes/3.x/theme-newspaper.css',
   }),
 )
+app.use(cors({
+  origin: "*"
+}))
 app.listen(PORT, () => console.log('connected!'))
 module.exports = app
