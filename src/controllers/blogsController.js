@@ -6,6 +6,17 @@ app.use(express.json())
 const bodyParser = require('body-parser')
 app.use(express.urlencoded())
 app.use(bodyParser.json())
+
+// const multer = require('multer')
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'upload')
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, new Date().toISOString() + file.originalname)
+//   },
+// })
+// const upload = multer({ storage: storage }).single('img')
 module.exports.blog_get = (req, res) => {
   blog.find({}, (err, data) => {
     if (!err) {
@@ -63,25 +74,22 @@ module.exports.blog_delete = (req, res) => {
     }
   })
 }
-module.exports.blog_post = async (req, res) => {
-  const { title, description, img, category, userActions } = req.body
-  console.log('likes and comments: ', userActions)
-  try {
-    const newBlog = await blog.create({
+module.exports.blog_post = (req, res) => {
+  const { title, description, category, userActions } = req.body;
+  console.log("file name to too: ", req.file)
+  console.log(req.body, 'nre nenenen')
+  const newBlog = blog
+    .create({
       title,
       description,
       category,
-      img,
+      img: req.file,
       time: new Date().toISOString(),
       userActions: userActions ? userActions : {},
     })
-    res.status(201).json({ message: 'Blog created', blog: newBlog })
-  } catch (err) {
-    console.log(err)
-  }
+    .save()
+    .then(() =>
+      res.status(201).json({ message: 'New Blog created', blog: newBlog }),
+    )
+    .catch((err) => console.log('not created: ', err))
 }
-// "userActions": {
-//   "views": 100,
-//   "likes": 50,
-//   "comments": []
-// }

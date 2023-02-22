@@ -11,20 +11,20 @@ app.use(express.json());
 const bodyParser = require("body-parser");
 app.use(express.urlencoded());
 app.use(bodyParser.json());
-const multer = require("multer");
 const { authAdmin } = require("../middlewares/authAdmin");
 app.use(express.static(__dirname + "/public"));
 app.use("/uploads", express.static("uploads"));
+const multer = require('multer')
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./uploads");
+    cb(null, 'upload')
   },
   filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + file.originalname);
+    cb(null, new Date().toISOString() + file.originalname)
   },
-});
+})
 const upload = multer({ storage: storage });
-// Login Page
+
 
 //logout
 router.delete("/logout", actionController.logout_get);
@@ -47,7 +47,9 @@ router.get(
 router.put("/api/users/:id", userController.users_update); //updated one
 router.delete("/api/users/:id", userController.users_delete); // delete one
 //blogs
-router.post("/api/blogs/add", upload.single("image"), blogsController.blog_post); //get all
+router.post("/api/blogs/add", upload.single("image"),
+ authAdmin(["erickykress@gmail.com"]), 
+ blogsController.blog_post); //add a blog
 router.get("/api/blogs", blogsController.blog_get); //get all
 router.get("/api/blogs/:id", blogsController.blog_getOne); //get single
 router.put(

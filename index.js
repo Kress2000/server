@@ -9,11 +9,11 @@ const session = require('express-session')
 app.use(express.static(__dirname + '/public'))
 app.use('/uploads', express.static('uploads'))
 const bodyParser = require('body-parser')
-app.use(bodyParser.json())
 const path = require('path')
 const swaggerUi = require('swagger-ui-express')
 swaggerDocument = require('./swagger.json')
-
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: false}));
 //port
 const PORT = process.env.PORT || 5000
 var cors = require('cors')
@@ -27,23 +27,19 @@ app.use(
   }),
 )
 app.use(expressLayouts)
-//bodyParser --
-app.use(express.urlencoded({ extended: false }))
 
 // Connect to MongoDB
 connectToDb()
-
 // Express session
 app.use(
   session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true,
-  }),
+  })
 )
-app.use('/mybrand', cors({
-  origin: "*",
-}), router)
+app.use('/mybrand', cors({origin: '*'}), router,)
+app.use(cors({ origin: '*'}))
 app.use(
   '/api-docs',
   swaggerUi.serve,
