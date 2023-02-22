@@ -457,6 +457,13 @@
           "img": {
             "type": "string",
             "example": "img url"
+          },
+          "time": {
+            "time": "string",
+            "example": "12h000"
+          },
+          "userActions": {
+            "type": "object"
           }
         }
       },

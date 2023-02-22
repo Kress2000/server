@@ -28,9 +28,11 @@ module.exports.blog_update = (req, res) => {
     description: req.body.description,
     img: req.body.img,
     category: req.body.category,
-    comments: req.body.category,
-    likes: req.body.category,
-    time: req.body.time,
+    time: new Date().toISOString(),
+    userActions: {
+      comments: req.body.category,
+      likes: req.body.category,
+    },
   }
   blog.findByIdAndUpdate(
     req.params.id,
@@ -61,19 +63,25 @@ module.exports.blog_delete = (req, res) => {
     }
   })
 }
-module.exports.blog_post = async(req, res) => {
-    const { title, description, img, category } = req.body;
-    console.log( req.body, "img", req.body.img)
-    try {
-      const newBlog = await blog.create({
-        title,
-        description,
-        category,
-        img ,
-        time: new Date().toISOString(),
-      })
-      res.status(201).json({ message: 'Blog created', blog: newBlog })
-    } catch (err) {
-      console.log(err)
-    }
+module.exports.blog_post = async (req, res) => {
+  const { title, description, img, category, userActions } = req.body
+  console.log('likes and comments: ', userActions)
+  try {
+    const newBlog = await blog.create({
+      title,
+      description,
+      category,
+      img,
+      time: new Date().toISOString(),
+      userActions: userActions ? userActions : {},
+    })
+    res.status(201).json({ message: 'Blog created', blog: newBlog })
+  } catch (err) {
+    console.log(err)
+  }
 }
+// "userActions": {
+//   "views": 100,
+//   "likes": 50,
+//   "comments": []
+// }
