@@ -7,6 +7,8 @@ const blogsController = require("../controllers/blogsController");
 const app = express();
 const { blog } = require("../models/blogs");
 app.use(express.json());
+const cors = require('cors')
+
 const bodyParser = require("body-parser");
 app.use(express.urlencoded());
 app.use(bodyParser.json());
@@ -70,14 +72,16 @@ router.post(
   upload.single("image"),
   async (req, res, next) => {
     console.log(req.file);
-    const { title, description, category } = req.body;
+    const { title, description, img, userActions, category } = req.body;
     try {
       const newBlog = await blog.create({
         title,
         description,
         category,
-        img: req.file.path,
+        img,
         time: new Date().toISOString(),
+        userActions,
+
       });
       console.log(newBlog, "created");
       res.status(201).json({ message: "Blog created", blog: newBlog });

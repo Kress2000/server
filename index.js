@@ -15,7 +15,7 @@ const swaggerUi = require('swagger-ui-express')
 swaggerDocument = require('./swagger.json')
 
 //port
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000
 var cors = require('cors')
 
 app.use(session({ secret: 'melody hensley is my spirit animal' }))
@@ -23,7 +23,7 @@ app.use(
   session({
     resave: false,
     saveUninitialized: true,
-    secret: 'secrete',  
+    secret: 'secrete',
   }),
 )
 app.use(expressLayouts)
@@ -34,6 +34,7 @@ app.use(express.urlencoded({ extended: false }))
 connectToDb()
 
 // Express session
+app.use()
 app.use(
   session({
     secret: 'secret',
@@ -41,7 +42,9 @@ app.use(
     saveUninitialized: true,
   }),
 )
-app.use('/mybrand', router)
+app.use('/mybrand', cors({
+  origin: "*",
+}), router)
 app.use(
   '/api-docs',
   swaggerUi.serve,
@@ -51,8 +54,6 @@ app.use(
       'https://cdn.jsdelivr.net/npm/swagger-ui-themes@3.0.0/themes/3.x/theme-newspaper.css',
   }),
 )
-app.use(cors({
-  origin: "*"
-}))
+
 app.listen(PORT, () => console.log('connected!'))
 module.exports = app
