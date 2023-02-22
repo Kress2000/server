@@ -34,7 +34,6 @@ app.use(express.urlencoded({ extended: false }))
 connectToDb()
 
 // Express session
-app.use()
 app.use(
   session({
     secret: 'secret',
