@@ -13,7 +13,27 @@ const path = require('path')
 const swaggerUi = require('swagger-ui-express')
 swaggerDocument = require('./swagger.json')
 app.use(bodyParser.json({limit: "50mb"}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: false}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
+
+const multer = require('multer')
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./upload/")
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().toISOString() + file.originalname)
+  },
+})
+const upload = multer({ storage: storage})
+router.post("/blogs/add", upload.single("img"), (req, res, next)=>{
+  console.log(req.file)
+  res.status(201).json({massage: "succss", img: req.file, othre:  req.filename});
+
+}
+)
+
+
+
 //port
 const PORT = process.env.PORT || 5000
 var cors = require('cors')
@@ -49,6 +69,5 @@ app.use(
       'https://cdn.jsdelivr.net/npm/swagger-ui-themes@3.0.0/themes/3.x/theme-newspaper.css',
   }),
 )
-
 app.listen(PORT, () => console.log('connected!'))
 module.exports = app
