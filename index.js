@@ -15,22 +15,22 @@ swaggerDocument = require('./swagger.json')
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
 
-const multer = require('multer')
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./upload/")
-  },
-  filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + file.originalname)
-  },
-})
-const upload = multer({ storage: storage})
-router.post("/blogs/add", upload.single("img"), (req, res, next)=>{
-  console.log(req.file)
-  res.status(201).json({massage: "succss", img: req.file, othre:  req.filename});
+// const multer = require('multer')
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "./upload/")
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, new Date().toISOString() + file.originalname)
+//   },
+// })
+// const upload = multer({ storage: storage})
+// router.post("/blogs/add", upload.single("img"), (req, res, next)=>{
+//   console.log(req.file)
+//   res.status(201).json({massage: "succss", img: req.file, othre:  req.filename});
 
-}
-)
+// }
+// )
 
 
 

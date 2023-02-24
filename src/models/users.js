@@ -5,6 +5,9 @@ const user = mongoose.model("user",
         name:{
             type: String
         },
+        id:{
+            type: Number
+        },
         email:{
             type: String,
             required: [true, 'please enter an Email'],

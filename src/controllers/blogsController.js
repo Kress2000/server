@@ -75,6 +75,11 @@ module.exports.blog_delete = (req, res) => {
 //   },
 // })
 // const upload = multer({ storage: StorageEngine })
+const timer = new Date();
+const second = timer.getMilliseconds();
+const randomN = Math.random(10);
+const newId = second + randomN;
+console.log(newId)
 
 module.exports.blog_post = async(req, res) => {
   // upload.single("img"),
@@ -85,6 +90,7 @@ module.exports.blog_post = async(req, res) => {
       description,
       category,
       img,
+      id: newId,
       time: new Date().toISOString(),
       userActions: userActions ? userActions : {},
     });

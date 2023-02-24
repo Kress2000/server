@@ -4,6 +4,9 @@ const blog = mongoose.model('blogs', {
     type: String,
     required: true,
   },
+  id: {
+    type: Number,
+  },
   description: {
     type: String,
     required: true,
